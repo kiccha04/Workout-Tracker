@@ -58,6 +58,69 @@ Users can register, log in, and manage their workouts. All APIs are protected us
 - Workout history for the current user
 
 ### 📘 API Documentation
+com.prem.workouttracker
+├── config # Security and Swagger configuration
+├── security # JWT utility, filter, user details
+├── controller # REST controllers
+├── service # Business logic
+├── repository # JPA repositories
+├── model # Entity classes
+├── dto # Request and response DTOs
+└── exception # Global exception handling
+
+
+---
+
+## 🗄 Database
+
+- Uses **MySQL**
+- JPA entities for User, Workout, Exercise, and WorkoutExercise
+- Relationships ensure user-specific data access
+
+Create database:
+```sql
+CREATE DATABASE workout_tracker;
+▶️ Running the Application
+
+Clone the repository
+
+Configure MySQL credentials in application.properties
+
+Run the application:
+
+./mvnw spring-boot:run
+
+Open Swagger UI:
+
+http://localhost:8080/swagger-ui.html
+🎯 Learning Outcomes
+
+Implemented JWT-based authentication in Spring Boot
+
+Secured REST APIs using Spring Security
+
+Designed layered backend architecture
+
+Used DTOs and global exception handling
+
+Built user-scoped APIs for real-world use cases
+
+🚀 Future Enhancements
+
+Refresh token support
+
+Role-based access control
+
+Dockerization
+
+Cloud deployment
+
+Advanced workout analytics
+
+👤 Author
+
+Prem T V
+Java Backend Developer
 - Swagger UI enabled
 - JWT authentication supported in Swagger
 
