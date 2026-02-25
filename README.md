@@ -84,8 +84,9 @@ com.prem.workouttracker
 - Relationships ensure user-specific data access  
 
 Create database:
-```sql
-CREATE DATABASE workout_tracker;
+sql
+
+## CREATE DATABASE workout_tracker;
 ▶️ Running the Application
 
 Clone the repository
