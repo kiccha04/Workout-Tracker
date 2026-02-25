@@ -1,104 +1,66 @@
-# Workout Tracker API
+# 🏋️ Workout Tracker REST API
 
-A RESTful backend for tracking workout plans, scheduled workouts, and basic progress reports.
-
-Built with **Spring Boot 4**, **Spring Security 7**, **JWT**, **MySQL**, **Spring Data JPA**, and **springdoc-openapi**.
-
----
-
-## Tech Stack
-
-- **Language**: Java 25
-- **Framework**: Spring Boot 4.0.2 (Spring Framework 7)
-- **Security**: Spring Security 7 + JWT (jjwt 0.12.x)
-- **Database**: MySQL 8 (with Spring Data JPA / Hibernate)
-- **Build**: Maven (wrapper included)
-- **API Docs**: springdoc-openapi + Swagger UI
-- **Tests**: JUnit 5, Mockito, Spring Boot Test, H2 in-memory
+A Spring Boot REST API for tracking workouts, exercises, and basic progress for individual users.  
+The application uses **JWT-based authentication** to securely manage user-specific workout data.
 
 ---
 
-## Features
+## 📌 Overview
 
-- **User Authentication**
-  - Register (`/api/auth/register`) and login (`/api/auth/login`) with email + password
-  - JWT-based stateless authentication (`Authorization: Bearer <token>`)
-
-- **Exercise Catalog**
-  - Seeded reference data for common exercises (name, description, category, muscle group)
-  - Read-only endpoints to list exercises
-
-- **Workouts**
-  - CRUD for workouts, scoped to the authenticated user
-  - Each workout can contain multiple exercises with sets, reps, and weight
-  - Simple scheduling via date + time fields
-
-- **Reports**
-  - Summary for the current user:
-    - Total workout count
-    - Weekly workout count (Mon–Sun)
-    - Workout history list
-
-- **API Documentation**
-  - Swagger UI with JWT support
+This project demonstrates how to build a **secure backend application** using Spring Boot and Spring Security.  
+Users can register, log in, and manage their workouts. All APIs are protected using **JWT (JSON Web Tokens)**.
 
 ---
 
-## Project Structure
+## 🛠 Tech Stack
 
-Root package: `com.prem.workouttracker`
-
-- `config`
-  - `SecurityConfig` – Spring Security 6 style configuration (JWT filter, stateless sessions, URL rules)
-  - `OpenApiConfig` – OpenAPI / Swagger UI configuration with Bearer JWT
-  - `DataSeeder` – Seeds initial exercise data on startup (non-test profile)
-
-- `security`
-  - `JwtUtil` – JWT generation/validation
-  - `JwtAuthFilter` – Reads Bearer tokens and populates SecurityContext
-  - `UserDetailsServiceImpl`, `UserPrincipal` – Spring Security user details
-
-- `model`
-  - `User` – email, encoded password, name, createdAt
-  - `Exercise` – reference data (name, description, category, muscleGroup)
-  - `Workout` – belongs to `User`, has name, scheduled date/time
-  - `WorkoutExercise` – joins `Workout` and `Exercise` with sets/reps/weight
-
-- `repository`
-  - `UserRepository`, `ExerciseRepository`, `WorkoutRepository`, `WorkoutExerciseRepository`
-
-- `dto`
-  - Auth DTOs: `RegisterRequest`, `LoginRequest`, `AuthResponse`
-  - Workout DTOs: `WorkoutRequest`, `WorkoutResponse`, `WorkoutExerciseRequest`, `WorkoutExerciseResponse`
-  - `ExerciseResponse`, `ReportResponse`
-
-- `service`
-  - `AuthService` – registration + login
-  - `WorkoutService` – all workout CRUD logic, scoped to current user
-  - `ExerciseService` – exercise read APIs
-  - `ReportService` – builds user report from workouts
-
-- `controller`
-  - `AuthController` – `/api/auth/**`
-  - `WorkoutController` – `/api/workouts/**`
-  - `ExerciseController` – `/api/exercises/**`
-  - `ReportController` – `/api/reports`
-
-- `exception`
-  - `ResourceNotFoundException`, `BadRequestException`, `GlobalExceptionHandler`
+- **Language**: Java  
+- **Framework**: Spring Boot  
+- **Security**: Spring Security + JWT  
+- **Database**: MySQL  
+- **ORM**: Spring Data JPA / Hibernate  
+- **Build Tool**: Maven  
+- **API Docs**: Swagger (springdoc-openapi)  
+- **Testing**: JUnit 5, Mockito, H2 (for tests)
 
 ---
 
-## Setup
+## 🔐 Authentication & Security
 
-### 1. Prerequisites
+- User registration and login using email and password
+- Passwords encrypted using **BCrypt**
+- Stateless authentication using **JWT (Bearer Token)**
+- Custom JWT filter for token validation
+- Users can access **only their own workout data**
 
-- Java 25 (JDK 25+)
-- Maven 3.8+ (or use `mvnw`/`mvnw.cmd`)
-- MySQL 8 running locally
+---
 
-### 2. Database
+## ✨ Features
 
-Create a database (or let Hibernate create it via the connection string):
+### 👤 Authentication
+- Register new users
+- Login and receive JWT token
+- Secure API access using `Authorization: Bearer <token>`
 
-CREATE DATABASE workout_tracker;
+### 🏃 Exercise Catalog
+- Predefined list of exercises
+- Read-only access for users
+
+### 📅 Workouts
+- Create, update, delete workouts
+- Add exercises with sets, reps, and weight
+- Schedule workouts by date and time
+- Workouts are scoped to the authenticated user
+
+### 📊 Reports
+- Total workout count
+- Weekly workout count
+- Workout history for the current user
+
+### 📘 API Documentation
+- Swagger UI enabled
+- JWT authentication supported in Swagger
+
+---
+
+## 🧱 Project Structure
